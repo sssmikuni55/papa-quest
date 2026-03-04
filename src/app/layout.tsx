@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://papa-quest.vercel.app"),
   title: "Papa-Quest | 産後クライシス予防・パパ向け育児支援アプリ",
   description: "毎日1つ送られてくる「育児・家事ミッション」をクリアし、パパとしてのレベルを上げていくクエスト型アプリ。妻をケアし、夫婦で産後の大変な時期を乗り切ろう！",
   keywords: ["育児", "パパ", "男性育休", "産後クライシス", "家事分担", "タスク管理"],
