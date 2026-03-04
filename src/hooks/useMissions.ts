@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { sendGAEvent } from '@next/third-parties/google';
 import missionsInfo from '@/data/missions.json';
 
 export type Mission = {
@@ -261,15 +262,20 @@ export function useMissions() {
     };
 
     const shuffleMission = () => {
+        const currentMission = startDateStr ? getMissionForDateStr(todayStr, startDateStr, activeMonth, userMilestones, hiddenMissions, shuffleOffset) : null;
+        if (currentMission) {
+            sendGAEvent({ event: 'mission_shuffled', value: 'today', mission_id: currentMission.id });
+        }
+
         setShuffleOffset(prev => {
             const nextOffset = prev + 1;
             localStorage.setItem('papa_quest_shuffle_offset', nextOffset.toString());
-            // Need to make sure date is today in localStorage
             localStorage.setItem('papa_quest_shuffle_date', getLocalDateString());
             return nextOffset;
         });
     };
     const hideMission = (id: number | string) => {
+        sendGAEvent({ event: 'mission_hidden', mission_id: id });
         setHiddenMissions(prev => {
             if (prev.includes(id)) return prev;
             const next = [...prev, id];
