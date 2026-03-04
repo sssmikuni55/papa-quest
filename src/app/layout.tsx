@@ -25,20 +25,11 @@ export const metadata: Metadata = {
     siteName: "Papa-Quest",
     locale: "ja_JP",
     type: "website",
-    images: [
-      {
-        url: "https://papa-quest.vercel.app/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Papa-Quest Thumbnail",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Papa-Quest",
     description: "毎日1ミッション。新米パパのための育児支援クエストアプリ",
-    images: ["https://papa-quest.vercel.app/og-image.svg"],
   },
   icons: {
     apple: "/icon512_maskable.png",

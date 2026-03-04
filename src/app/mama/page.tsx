@@ -134,12 +134,30 @@ export default function MamaPage() {
                     </div>
 
                     {/* Copy link */}
-                    <div className="mt-4 text-center">
+                    <div className="mt-4 text-center pb-6 border-b border-gray-100">
                         <button
                             onClick={handleCopyLink}
                             className="text-xs text-gray-400 underline active:text-gray-600 transition-colors"
                         >
                             {copied ? '✅ リンクをコピーしました！' : 'URLをコピーして別アプリで送る'}
+                        </button>
+                    </div>
+
+                    {/* X (Twitter) Share */}
+                    <div className="mt-6">
+                        <h3 className="text-[11px] font-bold text-gray-400 text-center mb-3">
+                            SNSで他のママにも教える
+                        </h3>
+                        <button
+                            onClick={() => {
+                                sendGAEvent({ event: 'mama_share_x' });
+                                const text = `産後クライシスを防ぐため、うちの旦那を「育児の神」に育てるRPGアプリ使い始めました！プレッシャーゼロで1日1ミッション届くらしい😂 全国のお疲れママたち、これ旦那にやらせよ🫶\n#PapaQuest #産後クライシス\n`;
+                                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(appUrl)}`, '_blank');
+                            }}
+                            className="w-full bg-black text-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 font-bold text-sm shadow-md active:scale-[0.98] transition-transform"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"></path></svg>
+                            X (Twitter) でシェア
                         </button>
                     </div>
                 </div>

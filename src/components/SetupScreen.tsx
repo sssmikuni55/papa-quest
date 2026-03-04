@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { sendGAEvent } from '@next/third-parties/google';
 
 import { MILESTONES } from '@/hooks/useMissions';
+import A2HSGuide from '@/components/A2HSGuide';
 
 type Props = {
     onComplete: (month: number, day: number, milestones: string[], participation: number) => void;
@@ -117,6 +118,52 @@ export default function SetupScreen({ onComplete }: Props) {
                             次へ進む
                         </button>
                     </div>
+                ) : step === 2 ? (
+                    <div className="flex flex-col gap-6 mt-6">
+                        <div className="text-center">
+                            <h2 className="text-lg font-bold text-gray-800 mb-2">パパクエを始める準備</h2>
+                            <p className="text-sm text-gray-500 leading-relaxed">
+                                アプリを毎日無理なく続けるための2つの設定をお願いします！
+                            </p>
+                        </div>
+
+                        {/* 1. ホーム画面への追加 */}
+                        <A2HSGuide />
+
+                        {/* 2. スマホ標準アラームの設定 */}
+                        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-sm">
+                            <h3 className="text-sm font-bold text-blue-800 flex items-center gap-2 mb-2">
+                                <span className="text-xl">⏰</span> 毎日のアラーム設定（必須級）
+                            </h3>
+                            <p className="text-xs text-blue-700 leading-relaxed pl-7 mb-3">
+                                パパクエにはプッシュ通知がありません。習慣化のために、<strong className="text-red-500 border-b border-red-300">今すぐスマホの「時計/アラーム」機能で、毎日決まった時間にアラームをセット</strong>してください！
+                            </p>
+                            <div className="bg-white/60 p-3 rounded-lg border border-blue-100/50 pl-7">
+                                <p className="text-[11px] text-blue-800 font-bold mb-1">おすすめのアラーム時刻：</p>
+                                <ul className="text-[11px] text-blue-700 list-disc list-inside space-y-1">
+                                    <li>通勤中の電車の中（朝8:00等）</li>
+                                    <li>お昼休み（12:30等）</li>
+                                    <li>寝る前のリラックスタイム（22:00等）</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-3 mt-4">
+                            <button
+                                onClick={() => setStep(1)}
+                                className="px-5 py-4 bg-gray-100 text-gray-500 font-bold rounded-2xl active:bg-gray-200 transition-colors"
+                            >
+                                戻る
+                            </button>
+                            <button
+                                onClick={() => setStep(3)}
+                                className="flex-1 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-blue-500/40 active:scale-95 transition-transform flex items-center justify-center gap-2"
+                            >
+                                <span>設定完了！次へ</span>
+                                <span className="text-lg">✨</span>
+                            </button>
+                        </div>
+                    </div>
                 ) : (
                     <>
                         <p className="text-center text-sm text-gray-500 mb-8 mt-2">お子さんの生年月日を教えてください</p>
@@ -203,20 +250,10 @@ export default function SetupScreen({ onComplete }: Props) {
                                 </div>
                             </div>
 
-                            <div className="mt-4 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
-                                <p className="text-xs font-bold text-blue-800 flex items-start gap-2 mb-2">
-                                    <span className="text-base leading-none">💡</span>
-                                    <span>継続のコツ：毎日のアラーム設定</span>
-                                </p>
-                                <p className="text-xs text-blue-600 leading-relaxed ml-6">
-                                    パパクエを習慣化するために、毎日決まった時間（例：21:00）にスマホのアラームやカレンダー通知をセットすることをおすすめします！
-                                </p>
-                            </div>
-
                             <div className="flex gap-3 mt-4">
                                 <button
                                     type="button"
-                                    onClick={() => setStep(1)}
+                                    onClick={() => setStep(2)}
                                     className="px-5 py-4 bg-gray-100 text-gray-500 font-bold rounded-2xl active:bg-gray-200 transition-colors"
                                 >
                                     戻る

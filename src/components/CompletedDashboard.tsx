@@ -80,7 +80,7 @@ export default function CompletedDashboard({
                 </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-8 flex items-center justify-between">
+            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-4 flex items-center justify-between">
                 <div>
                     <span className="text-xs font-bold text-blue-400 block mb-1">現在のパパランク</span>
                     <span className="text-lg font-bold text-blue-900">{levelInfo.title}</span>
@@ -89,6 +89,21 @@ export default function CompletedDashboard({
                     <span className="text-xs font-bold text-blue-400 block mb-1">累計EXP</span>
                     <span className="text-2xl font-black text-blue-600 font-mono">{totalExp}</span>
                 </div>
+            </div>
+
+            <div className="mb-8">
+                <button
+                    onClick={() => {
+                        sendGAEvent({ event: 'papa_share_x' });
+                        const text = `今日パパとしてのレベルが「${levelInfo.title}」になりました！💪\n産後クライシスを防ぐため、1日1ミッションの育児RPG「Papa-Quest」プレイ中！\n#PapaQuest #パパ育児\n`;
+                        const url = `https://papa-quest.vercel.app/`;
+                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+                    }}
+                    className="w-full bg-black text-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 font-bold text-sm shadow-md active:scale-[0.98] transition-transform"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true" className="w-4 h-4 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"></path></svg>
+                    X (Twitter) で成果をシェア
+                </button>
             </div>
 
             {recentMissions.length > 0 && (
